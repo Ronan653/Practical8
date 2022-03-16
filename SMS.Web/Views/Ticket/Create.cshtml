@@ -1,0 +1,17 @@
+@model TicketViewModel
+
+<h3 class="mt-4">Create Ticket</h3>
+
+<!-- The form posts back to the TicketController Create POST action --> 
+<form asp-action="Create">
+
+    <!-- TBC - complete the form to include a seleclist for StudentId and a text area for the Issue. -->
+
+    <!-- TBC - Add a submit input to post the form and a cancel anchor tag to cancel the form -->
+    
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

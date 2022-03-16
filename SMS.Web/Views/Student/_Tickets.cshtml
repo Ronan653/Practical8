@@ -1,0 +1,34 @@
+@model Student
+
+@if (Model.Tickets.Count == 0)
+{
+    <h5>No tickets yet....</h5>
+}
+else
+{
+    <div class="card rounded shadow p-3">
+        <table class="table table-sm">
+            <thead>
+                <tr>           
+                    <th>Ticket Issue</th>
+                    <th>Created</th>  
+                    <th>Active</th>       
+                    <th>Actions</th>  
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var t in Model.Tickets) {
+                    <tr>              
+                        <td data-formatter="shortingText">@t.Issue</td>
+                        <td>@t.CreatedOn</td>  
+                        <td>@t.Active</td>
+                        <td>
+                            <!-- replace anchor text with suitable bootstrap icon-->
+                            <a asp-action="TicketDelete" asp-route-id="@t.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </td>             
+                    </tr>   
+                }
+            </tbody>
+        </table>
+    </div>
+}

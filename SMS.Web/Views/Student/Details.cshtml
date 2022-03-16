@@ -1,0 +1,68 @@
+@model Student
+<!-- TBC add a breadcrumb partial -->
+
+<h3 class="mt-4 mb-4">Student Details</h3>
+<div class="row">
+    <!-- Details -->
+    <div class="col-8 card rounded shadow p-3">
+        <dl class="row">
+            <dt class="col-5">Name</dt>
+            <dd class="col-7">@Model.Name</dd>
+
+            <dt class="col-5">Course</dt>
+            <dd class="col-7">@Model.Course</dd>
+
+            <dt class="col-5">Age</dt>
+            <dd class="col-7">@Model.Age</dd>
+
+            <dt class="col-5">Email</dt>
+            <dd class="col-7">@Model.Email</dd>
+
+            <dt class="col-5">Classification</dt>
+            <dd class="col-7">@Model.Classification</dd>
+        </dl>
+
+
+        <!-- TBC supplement anchor tags below with suitable bootstrap icons -->
+        
+        <!-- flex box used create left/right button groups -->
+        <div class="mt-4 d-flex flex-row justify-content-between">
+            <!-- primary actions displayed on left -->
+            <div>                
+                <a asp-action="TicketCreate" asp-route-id="@Model.Id" class="btn btn-sm btn-primary">
+                    Add Ticket
+                </a>          
+                
+                <a asp-controller="Student" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-secondary">
+                    Edit
+                </a>
+
+                <a asp-controller="Student" asp-action="Index" class="btn btn-sm btn-link">
+                    Students
+                </a>
+            </div>
+            
+            <!-- danger action placed on right -->
+            <div>
+                <!-- TBC - replace anchor tag with button to toggle display of Delete Modal -->
+                <a asp-controller="Student" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">
+                    Delete
+                </a>
+            </div>
+        </div>    
+    </div>
+
+    <!-- Photo -->
+    <div class="col-4">
+        <img src="@Model.PhotoUrl" class="img-fluid">
+    </div>
+</div>
+
+<!-- Tickets -->
+<div class="row pt-4">
+    <h5 class="pb-3">Tickets</h5>
+    <partial name="_Tickets" />
+</div>
+
+<!-- add Delete Modal partial -->
+
