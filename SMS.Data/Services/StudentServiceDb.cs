@@ -46,6 +46,7 @@ namespace SMS.Data.Services
         public Student AddStudent(string name, string course, string email,
                                     int age, double grade, string photoUrl)
         {
+
             // check if student with email exists            
             var exists = GetStudentByEmail(email);
             if (exists != null)

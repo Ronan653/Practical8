@@ -34,7 +34,8 @@ namespace SMS.Web.Controllers
             if (s == null)
             {
                 // TBC - Display suitable warning alert and redirect to Index               
-                return NotFound();
+                Alert($"No such student {id}", AlertType.warning);
+                return RedirectToAction(nameof(Index));
             }
 
             // pass student as parameter to the view
@@ -52,6 +53,12 @@ namespace SMS.Web.Controllers
         [HttpPost]
         public IActionResult Create(Student s)
         {
+            if(svc.IsDuplicateStudentEmail(s.Email, s.Id))
+            {
+                ModelState.AddModelError(nameof(s.Email), "This Email address is already registered");
+
+            }
+
             // complete POST action to add student
             if (ModelState.IsValid)
             {
@@ -59,8 +66,11 @@ namespace SMS.Web.Controllers
                 svc.AddStudent(s.Name, s.Course, s.Email, s.Age, s.Grade, s.PhotoUrl);
 
                 // TBC - display suitable success alert
+                Alert($"Student {s.Id} Created", AlertType.success);
                
-                return RedirectToAction(nameof(Details), new { Id = s.Id});
+                return RedirectToAction(nameof(Details), new { ID = s.Id});
+
+                
             }
             
             // redisplay the form for editing as there are validation errors
@@ -77,7 +87,8 @@ namespace SMS.Web.Controllers
             if (s == null)
             {               
                 // TBC - Display suitable warning alert and redirect to Index               
-                return NotFound();
+                Alert($"No such student {id} to Edit", AlertType.warning);
+                return RedirectToAction(nameof(Index));
             }   
 
             // pass student to view for editing
@@ -89,7 +100,11 @@ namespace SMS.Web.Controllers
         public IActionResult Edit(int id, Student s)
         {
             // TBC - check if the emailaddress is a duplicate and if so add a validation error
-            
+            if(svc.IsDuplicateStudentEmail(s.Email, s.Id))
+            {
+                ModelState.AddModelError(nameof(s.Email), "This Email address is already registered");
+
+            }
 
             // complete POST action to save student changes
             if (ModelState.IsValid)
@@ -98,7 +113,7 @@ namespace SMS.Web.Controllers
                 svc.UpdateStudent(s);
                 
                 // TBC - display suitable success alert and redirect to details view
-               
+                Alert($"Student {id} has been successfully edited", AlertType.success);
                 return RedirectToAction(nameof(Details), new { Id = s.Id });
             }
 
@@ -115,7 +130,8 @@ namespace SMS.Web.Controllers
             if (s == null)
             {
                 // TBC - Display suitable warning alert and redirect to Index               
-                return NotFound();
+                Alert($"No such student {id} to Delete", AlertType.warning);
+                return RedirectToAction(nameof(Index));
             }     
             
             // pass student to view for deletion confirmation
@@ -129,6 +145,7 @@ namespace SMS.Web.Controllers
             svc.DeleteStudent(id);
 
             // TBC display success alert
+            Alert($"Student {id} has been Deleted", AlertType.success);
 
             // redirect to the index view
             return RedirectToAction(nameof(Index));
@@ -144,7 +161,8 @@ namespace SMS.Web.Controllers
             if (s == null)
             {
                 // TBC - Display suitable warning alert and redirect to Index               
-                return NotFound();
+                Alert($"No such student {id} to create Ticket", AlertType.warning);
+                return RedirectToAction(nameof(Index));
             }
 
             // create a ticket view model and set foreign key
@@ -162,6 +180,7 @@ namespace SMS.Web.Controllers
                 var ticket = svc.CreateTicket(t.StudentId, t.Issue);
 
                 // TBC - display suitable success alert
+                Alert($"Ticket created", AlertType.success);
               
                 return RedirectToAction(nameof(Details), new { Id = ticket.StudentId });
             }
@@ -178,7 +197,9 @@ namespace SMS.Web.Controllers
             if (ticket == null)
             {
                 // TBC - Display suitable warning alert and redirect to Index               
-                return NotFound();
+                Alert($"No Ticket to delete", AlertType.warning);
+                return RedirectToAction(nameof(Index));
+
             }     
             
             // pass ticket to view for deletion confirmation
@@ -193,6 +214,8 @@ namespace SMS.Web.Controllers
             svc.DeleteTicket(id);
            
             // TBC - Display a suitable success Alert
+            Alert($"Ticket Created", AlertType.success);
+            
            
             // redirect to the index view
             return RedirectToAction(nameof(Details), new { Id = studentId });

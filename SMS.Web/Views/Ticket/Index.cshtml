@@ -4,11 +4,47 @@
 
 <div class="mt-4 mb-4">
    <!-- TBC - add an action link styled as a button to navigate to Create Action -->
-   <!--       consider supplementing the button text with a suitable icon        -->  
-  
+   <!--       consider supplementing the button text with a suitable icon        --> 
+   <a class="btn btn-sm btn-primary my-3" asp-controller="Ticket" asp-action="Create" aria-label="Create a new Ticket"><i class="bi bi-plus"></i> Create Ticket <i class="bi bi-ticket"></i> </a>
+   
 </div>
 
 <!-- TBC - add a table to display all open tickets and in each tickets action   -->
 <!--       column add a Close ticket button wrapped in a form to close a ticket -->
 
+
+   <div class="card rounded shadow p-3">
+      <table class="table table-sm">
+         <thead>
+            <tr>
+               <th>Student ID</th>
+               <th>Student Name</th>
+               <th>Ticket ID</th>
+               <th>Ticket Issue</th>
+               <th>Created</th>
+               <th>Active</th>
+               <th>Actions</th>
+            </tr>
+         </thead>
+         <tbody>
+            @foreach (var t in Model) 
+         {
+               <tr>
+                  <td>@t.StudentId</td>
+                  <td>@t.Student.Name</td>
+                  <td>@t.Id</td>
+                  <td data-formatter="shortingText">@t.Issue</td>
+                  <td>@t.CreatedOn</td>
+                  <td>@t.Active</td>
+                  <td>
+                        <form asp-action="Close">
+                           <input type="hidden" name="id" value=@t.Id/>
+                           <input type="submit" value="Close" class="btn btn-danger" /> <!-- Using the form format found in the notes however it does not seem to be passing the ticket id along correctly -->
+                        </form>
+                  </td>
+               </tr>
+         }
+         </tbody>
+      </table>
+   </div>
 

@@ -1,3 +1,25 @@
 @model Student
 
 <!-- TBC Delete Modal -->
+<div class="modal" tabindex="-1" id = "deleteModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Student</h5>
+          <span aria-hidden="true">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete @Model.Name ?</p>
+      </div>
+      <div class="modal-footer">
+          <form asp-action = "DeleteConfirm">
+              <input type ="hidden" asp-for=@Model.Id>
+
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-danger" value="Confirm">
+
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

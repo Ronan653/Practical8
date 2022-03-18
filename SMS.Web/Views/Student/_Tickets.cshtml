@@ -24,7 +24,7 @@ else
                         <td>@t.Active</td>
                         <td>
                             <!-- replace anchor text with suitable bootstrap icon-->
-                            <a asp-action="TicketDelete" asp-route-id="@t.Id" class="btn btn-sm btn-danger">Delete</a>
+                            <a title="Delete Ticket" asp-action="TicketDelete" asp-route-id="@t.Id" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></a>
                         </td>             
                     </tr>   
                 }

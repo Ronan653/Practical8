@@ -1,5 +1,10 @@
 @model Student
 <!-- TBC add a breadcrumb partial -->
+<partial name = "_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ("/Student", "Students"),
+    ("", "Details")
+    } )/>
 
 <h3 class="mt-4 mb-4">Student Details</h3>
 <div class="row">
@@ -25,29 +30,30 @@
 
         <!-- TBC supplement anchor tags below with suitable bootstrap icons -->
         
+        
         <!-- flex box used create left/right button groups -->
         <div class="mt-4 d-flex flex-row justify-content-between">
             <!-- primary actions displayed on left -->
             <div>                
-                <a asp-action="TicketCreate" asp-route-id="@Model.Id" class="btn btn-sm btn-primary">
-                    Add Ticket
+                <a title="Create Ticket" asp-action="TicketCreate" asp-route-id="@Model.Id" class="btn btn-sm btn-primary">
+                    <i class="bi bi-ticket"></i>
                 </a>          
                 
-                <a asp-controller="Student" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-secondary">
-                    Edit
+                <a title="Edit Student Details" asp-controller="Student" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-secondary">
+                    <i class="bi bi-pencil-square"></i>
                 </a>
 
-                <a asp-controller="Student" asp-action="Index" class="btn btn-sm btn-link">
-                    Students
+                <a title="Return to Students" asp-controller="Student" asp-action="Index" class="btn btn-sm btn-link">
+                    <i class="bi bi-arrow-left"></i>
                 </a>
             </div>
             
             <!-- danger action placed on right -->
             <div>
                 <!-- TBC - replace anchor tag with button to toggle display of Delete Modal -->
-                <a asp-controller="Student" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">
-                    Delete
-                </a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    <i class="bi bi-trash-fill"></i>
+                </button>
             </div>
         </div>    
     </div>
@@ -65,4 +71,5 @@
 </div>
 
 <!-- add Delete Modal partial -->
+<partial name="_DeleteModal"/>
 

@@ -9,7 +9,7 @@ namespace SMS.Web.Models
         public SelectList Students { set; get; }
 
         // Collecting StudentId and Issue in Form
-        [Required]
+        [Required(ErrorMessage = "Please Select a Student")]
         [Display(Name = "Select Student")]
         public int StudentId { get; set; }
 

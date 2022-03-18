@@ -27,13 +27,25 @@
                             <a class="nav-link text-dark" asp-controller="Student" asp-action="Index">Students</a>
                         </li>
                         <!-- TBC - add a menu item for Tickets -->
+                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Ticket" asp-action="Index">Tickets</a>
+                        </li>
 
                         <!-- TBC - combine Privacy and About into a single drop down titled Company -->
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">About</a>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-expanded="false">
+                                Company
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="About">About</a>
+                                </li>
+                            </ul>
                         </li>
 
                     </ul>
